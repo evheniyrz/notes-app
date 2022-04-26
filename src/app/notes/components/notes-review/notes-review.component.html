@@ -4,14 +4,12 @@
     id=""
     cols="30"
     rows="2"
-    autofocus="false"
   ></textarea>
 </div>
 
 <div class="text-area-container">
   <div #substrate class="substrate"></div>
   <textarea
-    autofocus="false"
     (scroll)="scroll($event)"
     [formControl]="textAreaControl"
     id=""
