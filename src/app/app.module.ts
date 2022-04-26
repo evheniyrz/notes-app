@@ -5,6 +5,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NotesModule } from './notes/notes.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { DbService } from './services/in-memory-db/in-memory-db.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -14,9 +17,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserModule,
     AppRoutingModule,
     NotesModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpClientModule,
+    InMemoryWebApiModule.forRoot(DbService)
   ],
-  providers: [],
+  providers: [
+    DbService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

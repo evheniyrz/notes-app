@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { InjectionToken, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { NotesRoutingModule } from './notes-routing.module';
@@ -9,6 +9,11 @@ import { NotesListComponent } from './components/notes-list/notes-list.component
 import { MatButtonModule } from '@angular/material/button';
 import { NoteSearchComponent } from './components/notes-list/components/note-search/note-search.component';
 import { NoteAddComponent } from './components/notes-list/components/note-add/note-add.component';
+import { NoteApiService } from './services/note/note.service';
+import { environment } from 'src/environments/environment';
+import { NoteApiConfiguration } from './services/note/note-api.model';
+
+export const NOTE_API_CONFIGURATION: InjectionToken<NoteApiConfiguration> = new InjectionToken('Note API configuration');
 
 
 @NgModule({
@@ -25,6 +30,16 @@ import { NoteAddComponent } from './components/notes-list/components/note-add/no
     FormsModule,
     ReactiveFormsModule,
     MatButtonModule
+  ],
+  providers: [
+    {
+      provide: NOTE_API_CONFIGURATION,
+      useValue: {
+        api: environment.DB_API,
+        path: 'notes'
+      }
+    },
+    NoteApiService
   ]
 })
 export class NotesModule { }
