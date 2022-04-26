@@ -1,3 +1,8 @@
-<button mat-icon-button class="add-note" type="button">
+<button
+  mat-icon-button
+  matTooltip="Add Note"
+  (click)="openDialog()"
+  type="button"
+  class="add-note">
   <span class="material-icons">add</span>
 </button>

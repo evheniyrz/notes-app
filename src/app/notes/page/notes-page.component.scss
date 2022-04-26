@@ -3,7 +3,7 @@
   height: 100%;
   width: 100%;
   background-color: blueviolet;
-  grid-template-columns: 30% 1fr;
+  grid-template-columns: minmax(280px, 30%) 1fr;
   grid-template-rows: 1fr;
   grid-template-areas:
     "list review"

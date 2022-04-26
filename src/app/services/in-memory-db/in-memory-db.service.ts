@@ -9,7 +9,7 @@ export class DbService implements InMemoryDbService {
 
   createDb() {
 
-    const notes: Note[] = [];
+    const notes: Note[] = [{ title: "Test title", tags: [], content: '', updateAt: 1650988074166, id: '' }];
 
     return { notes };
   }

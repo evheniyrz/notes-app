@@ -4,7 +4,20 @@
 </div>
 
 <div class="item-container note-list-container">
-  note list
+  <ng-container *ngFor="let item of noteList$ | async; count as length;">
+    <div *ngIf="length === 0" class="no-data-available">
+      <span>No Data Available</span>
+    </div>
+    <div class="note-list-item">
+      <div class="note-data">
+        <a class="item-title">{{item.title}}</a>
+        <span class="item-date">{{item.updateAt | date: 'dd.MM.yyyy'}}</span>
+      </div>
+      <button mat-icon-button class="delete-button">
+        <span class="material-icons">close</span>
+      </button>
+    </div>
+  </ng-container>
 </div>
 
 <div class="item-container tag-list-container">

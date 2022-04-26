@@ -1,6 +1,6 @@
 export const WS_NOTE_EVENTS = {
   ON: {
-    UPDATE_LIST: 'update_list',
+    UPDATE_DATA: 'update_data',
     UPDATE_TEXTS: 'update-texts'
   },
   SEND: {

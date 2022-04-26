@@ -18,7 +18,7 @@ export class WebSocketService implements WsService {
 
   private connection$!: Observer<boolean>;
 
-  private wsMessages$!: Subject<WsMessage<any>>;
+  private wsMessages$!: Subject<string>;
 
   private reconnectInterval!: number;
 
@@ -29,7 +29,7 @@ export class WebSocketService implements WsService {
   public status!: Observable<boolean>;
 
   constructor(@Inject(WS_CONFIG) private wsConfig: WsConfig) {
-    this.wsMessages$ = new Subject<WsMessage<any>>();
+    this.wsMessages$ = new ReplaySubject<string>(1);
     this.reconnectInterval = wsConfig.reconnectInterval || 5000;
     this.reconnectAttempts = wsConfig.reconnectAttempts || 10;
 
@@ -84,12 +84,15 @@ export class WebSocketService implements WsService {
   * on message event
   * */
   public on<T>(event: string): Observable<T> {
-    // if (event) {
-    return this.wsMessages$.pipe(
-      filter((message: WsMessage<T>) => message.event === event),
+    return this.wsMessages$.asObservable().pipe(
+      map((responseMessage: string) => {
+        return JSON.parse(responseMessage);
+      }),
+      filter((message: WsMessage<any>) => {
+        return message.event === event
+      }),
       map((message: WsMessage<T>) => message.data)
     );
-    // }
   }
 
 
@@ -98,6 +101,7 @@ export class WebSocketService implements WsService {
   * */
   public send(event: string, data: any = {}): void {
     if (event && this.isConnected) {
+      console.log('SEND', event);
       this.websocket$?.next(<any>JSON.stringify({ event, data }));
     } else {
       console.error('Send error!');
@@ -108,11 +112,12 @@ export class WebSocketService implements WsService {
     * connect to WebSocked
     * */
   private connect(): void {
-    this.websocket$ = webSocket(this.config);
+    this.websocket$ = new WebSocketSubject(this.config);
     this.websocket$.asObservable().subscribe(
       {
         next: (message) => {
-          this.wsMessages$.next(message)
+          const payload: string = JSON.stringify(message);
+          this.wsMessages$.next(payload)
         },
         error: (error: Event) => {
           if (!this.websocket$) {

@@ -11,13 +11,49 @@
     align-items: center;
     justify-content: space-between;
     align-self: flex-start;
+    border-bottom: 2px solid #ffffff;
+    padding: 10px;
   }
 
   .note-list-container {
     flex: 1;
+
+    .note-list-item {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px;
+      border-bottom: 2px solid #ffffff;
+
+      .note-data {
+        flex: 1;
+        display: flex;
+        flex-flow: column;
+
+        .item-title {
+          font-weight: 500;
+          font-size: 16px;
+          color: #212121;
+          margin-bottom: 5px;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
+
+        .item-date {
+          color: #ababab;
+        }
+      }
+
+      .delete-button {
+        color: #ffffff;
+      }
+    }
   }
 
   .tag-list-container {
     align-self: flex-end;
+    min-height: 60px;
+    border-top: 2px solid #ffffff;
   }
 }

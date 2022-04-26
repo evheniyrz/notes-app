@@ -12,4 +12,7 @@ export class NoteAddComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  openDialog(): void {
+
+  }
 }

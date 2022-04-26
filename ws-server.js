@@ -8,14 +8,15 @@ const port = 5000;
 const wsServer = new ws.Server({ noServer: true });
 wsServer.on('connection', socket => {
   socket.on('message', message => {
-
+    const socketMessage = JSON.parse(message.toString('utf8'));
+    console.log("SOCKET", socketMessage);
     wsServer.clients.forEach(function each(client) {
       if (client.readyState === ws.OPEN) {
         setTimeout(function () {
           client.send(
 
 
-            Buffer.from(JSON.stringify({ "source": "server", "content": "response from server" }))
+            Buffer.from(socketMessage)
 
             , { binary: false });
         }, 1000);
@@ -23,8 +24,6 @@ wsServer.on('connection', socket => {
 
       }
     });
-
-    console.log(message.toString());
   }
   );
 });

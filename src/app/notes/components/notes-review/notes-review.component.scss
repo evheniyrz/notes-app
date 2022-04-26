@@ -3,11 +3,12 @@
   flex-flow: column nowrap;
 }
 
+$text-area-size: 14px;
+
 .text-area-container {
   position: relative;
   display: inline-block;
   font-size: 0;
-  --text-area-size: 14px;
   width: 100%;
   flex: 1;
 }
@@ -20,7 +21,7 @@
   height: 100%;
   width: 100%;
   font-family: monospace;
-  font-size: var(--text-area-size);
+  font-size: $text-area-size;
   text-rendering: auto;
   color: transparent;
   white-space: pre-wrap;
@@ -45,7 +46,7 @@ textarea {
 
 textarea.note-content {
   position: relative;
-  font-size: var(--text-area-size);
+  font-size: $text-area-size;
   z-index: 2;
   background: transparent;
   -webkit-appearance: textfield;
