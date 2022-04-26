@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  DB_API: 'http://localhost:8080/api'
+  DB_API: 'http://localhost:8080/api',
+  WS_ENDPOINT: 'ws://localhost:5000'
 };
 
 /*

@@ -8,6 +8,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { DbService } from './services/in-memory-db/in-memory-db.service';
 import { HttpClientModule } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+import { WebSocketService } from './services/web-socket/web-socket.service';
+import { WS_CONFIG } from './services/web-socket/ws-config.model';
 
 @NgModule({
   declarations: [
@@ -22,7 +25,14 @@ import { HttpClientModule } from '@angular/common/http';
     InMemoryWebApiModule.forRoot(DbService)
   ],
   providers: [
-    DbService
+    DbService,
+    {
+      provide: WS_CONFIG,
+      useValue: {
+        url: environment.WS_ENDPOINT
+      }
+    },
+    WebSocketService
   ],
   bootstrap: [AppComponent]
 })
