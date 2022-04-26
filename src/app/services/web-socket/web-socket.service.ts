@@ -30,7 +30,6 @@ export class WebSocketService implements WsService {
 
   constructor(@Inject(WS_CONFIG) private wsConfig: WsConfig) {
     this.wsMessages$ = new Subject<WsMessage<any>>();
-    console.log('CALL SERVICE CONSTRUCTOR');
     this.reconnectInterval = wsConfig.reconnectInterval || 5000;
     this.reconnectAttempts = wsConfig.reconnectAttempts || 10;
 
@@ -38,7 +37,6 @@ export class WebSocketService implements WsService {
       url: wsConfig.url,
       closeObserver: {
         next: (event: CloseEvent) => {
-          console.log('CLOSE EVENT', event);
           this.websocket$ = null;
           this.connection$.next(false);
         }
@@ -117,7 +115,6 @@ export class WebSocketService implements WsService {
           this.wsMessages$.next(message)
         },
         error: (error: Event) => {
-          console.log('ERROR===>', error);
           if (!this.websocket$) {
             // run reconnect if errors
             this.reconnect();
