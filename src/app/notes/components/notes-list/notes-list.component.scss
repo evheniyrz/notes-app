@@ -1,3 +1,23 @@
 :host {
-  display: block;
+  display: flex;
+  flex-flow: column nowrap;
+
+  .item-container {
+    width: 100%;
+  }
+
+  .action-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    align-self: flex-start;
+  }
+
+  .note-list-container {
+    flex: 1;
+  }
+
+  .tag-list-container {
+    align-self: flex-end;
+  }
 }
