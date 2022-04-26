@@ -1,3 +1,19 @@
 :host {
-  display: block;
+  display: grid;
+  height: 100%;
+  width: 100%;
+  background-color: blueviolet;
+  grid-template-columns: 30% 1fr;
+  grid-template-rows: 1fr;
+  grid-template-areas:
+    "list review"
+  ;
+}
+
+.note-list {
+  grid-area: list;
+}
+
+.note-review {
+  grid-area: review;
 }

@@ -1,1 +1,21 @@
-<p>notes-review works!</p>
+<div class="note-title">
+  <textarea
+    [formControl]="titleAreaControl"
+    id=""
+    cols="30"
+    rows="2"
+    autofocus="false"
+  ></textarea>
+</div>
+
+<div class="text-area-container">
+  <div #substrate class="substrate"></div>
+  <textarea
+    autofocus="false"
+    (scroll)="scroll($event)"
+    [formControl]="textAreaControl"
+    id=""
+    cols="30"
+    class="note-content"
+  ></textarea>
+</div>
