@@ -13,7 +13,10 @@
         <a class="item-title">{{item.title}}</a>
         <span class="item-date">{{item.updateAt | date: 'dd.MM.yyyy'}}</span>
       </div>
-      <button mat-icon-button class="delete-button">
+      <button
+        mat-icon-button
+        (click)="deleteNote(item.id)"
+        class="delete-button">
         <span class="material-icons">close</span>
       </button>
     </div>
