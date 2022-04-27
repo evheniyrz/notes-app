@@ -15,11 +15,19 @@ export class NotesListComponent implements OnInit {
 
   constructor(private wsService: WebSocketService) {
     this.noteList$ = this.wsService.on(WS_NOTE_EVENTS.ON.UPDATE_DATA).pipe(
-      map((resp) => { console.log('RESP', resp); return resp })
+      map((resp) => { return this.getSortedNotes(resp as Note[]) })
     ) as Observable<Note[]>;
   }
 
   ngOnInit(): void {
+  }
+
+  private getSortedNotes(input: Note[]): Note[] {
+    return input.sort((a: Note, b: Note) => {
+      if (a.updateAt > b.updateAt) return -1;
+      if (a.updateAt < b.updateAt) return 1;
+      return 0;
+    })
   }
 
 }
