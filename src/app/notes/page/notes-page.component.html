@@ -1,3 +1,6 @@
 <app-notes-list class="note-list"></app-notes-list>
 
-<app-notes-review class="note-review"></app-notes-review>
+<div class="note-review">
+  <router-outlet name="notereview" #noteOutlet="outlet"></router-outlet>
+  <span *ngIf="!noteOutlet.isActivated" class="placeholder">select a note from the list to view or edit</span>
+</div>

@@ -43,8 +43,6 @@ export class NoteAddComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.noteTitleControl,
-      this.noteTextControl);
   }
 
   public openDialog(): void {
@@ -65,7 +63,7 @@ export class NoteAddComponent implements OnInit {
         tags: this.getNoteTags(this.noteTextControl.value),
         updateAt: Date.now()
       };
-
+      console.log(notePayload);
       this.service.createNote(notePayload).pipe(
         concatMap(() => {
           return this.service.getNotes().pipe((
@@ -75,8 +73,7 @@ export class NoteAddComponent implements OnInit {
       ).subscribe(
         {
           next: () => this.dialogRef.close(),
-          error: () => this.dialogRef.close(),
-          complete: () => console.log('COMPLETE')
+          error: () => this.dialogRef.close()
         }
       );
     }

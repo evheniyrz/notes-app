@@ -15,7 +15,7 @@ export class TagsComponent implements OnInit {
 
   constructor(private wsService: WebSocketService) {
     this.tagList$ = this.wsService.on(WS_NOTE_EVENTS.ON.UPDATE_DATA).pipe(
-      map((resp) => { console.log('RESP', resp); return this.createTagList(resp as Note[]) })
+      map((resp) => { return this.createTagList(resp as Note[]) })
     ) as Observable<string[]>;
   }
 

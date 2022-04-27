@@ -11,6 +11,7 @@
   <div #substrate class="substrate"></div>
   <textarea
     (scroll)="scroll($event)"
+    (blur)="updateNoteContent()"
     [formControl]="textAreaControl"
     id=""
     cols="30"

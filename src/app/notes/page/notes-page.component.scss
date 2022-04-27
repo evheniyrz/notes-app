@@ -15,5 +15,14 @@
 }
 
 .note-review {
+  display: flex;
   grid-area: review;
+  border-left: 2px solid #ffffff;
+  width: 100%;
+
+  .placeholder {
+    font-size: 20px;
+    color: #ffffff;
+    margin: auto;
+  }
 }
