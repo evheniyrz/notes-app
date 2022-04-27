@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { concatMap, map, Observable, tap } from 'rxjs';
+import { BehaviorSubject, concatMap, map, Observable, tap } from 'rxjs';
 import { Note } from 'src/app/services/in-memory-db/models/note.model';
 import { WebSocketService } from 'src/app/services/web-socket/web-socket.service';
 import { WS_NOTE_EVENTS } from 'src/app/services/web-socket/ws-note-events';
 import { NoteApiService } from '../../services/note/note.service';
+import { SearchValuesState } from './models/searc.model';
 
 @Component({
   selector: 'app-notes-list',
@@ -14,9 +15,19 @@ export class NotesListComponent implements OnInit {
 
   public noteList$: Observable<Note[]>;
 
+  public filteredNoteList$: BehaviorSubject<Note[]> = new BehaviorSubject([] as Note[]);
+
+  private searchValues$: BehaviorSubject<SearchValuesState> = new BehaviorSubject({});
+
+  private noteListData: Note[] = [];
+
   constructor(private wsService: WebSocketService, private service: NoteApiService) {
     this.noteList$ = this.wsService.on(WS_NOTE_EVENTS.ON.UPDATE_DATA).pipe(
-      map((resp) => { return this.getSortedNotes(resp as Note[]) })
+      map((resp) => {
+        this.noteListData = this.getSortedNotes(resp as Note[]);
+        this.filteredNoteList$.next(this.getSortedNotes(resp as Note[]));
+        return resp;
+      })
     ) as Observable<Note[]>;
   }
 
@@ -31,6 +42,34 @@ export class NotesListComponent implements OnInit {
         ))
       })
     ).subscribe();
+  }
+
+  public search(search: SearchValuesState): void {
+    const foundNotes: Set<Note> = new Set();
+    const updatedSearchState: SearchValuesState = {
+      ...this.searchValues$.getValue(),
+      ...search
+    };
+
+    if ((null == search.tags || search.tags?.length === 0) && (null == search.text || search.text?.[0]?.length === 0)) {
+      this.filteredNoteList$.next(this.noteListData);
+    } else {
+      const filterValues: string[] = Object.values(updatedSearchState)?.flat();
+
+      const existingFilteredNotes: Note[] = this.filteredNoteList$.getValue();
+      filterValues.forEach((filterValue: string) => {
+        existingFilteredNotes.forEach((note: Note) => {
+          if (note.title.includes(filterValue) || note.tags.includes(filterValue)) {
+            foundNotes.add(note);
+          }
+        });
+      });
+
+      this.filteredNoteList$.next(this.getSortedNotes(Array.from(foundNotes)));
+    }
+
+    this.searchValues$.next(updatedSearchState);
+    this.wsService.send(WS_NOTE_EVENTS.SEND.SEARCH, this.filteredNoteList$.getValue());
   }
 
   private getSortedNotes(input: Note[]): Note[] {
