@@ -19,7 +19,6 @@ export class NotesReviewComponent implements OnInit, OnDestroy {
   public titleAreaControl!: FormControl;
 
   private hashtagsRegex = /(^|\W)((#[a-z\d][\w-]*)|(#[а-яё\d-]+))/gi;
-  private hashTags: Set<string> = new Set();
 
   private noteId!: string;
   private currentNote!: Note;

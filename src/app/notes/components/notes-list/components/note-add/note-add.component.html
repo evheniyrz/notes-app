@@ -23,7 +23,9 @@
       </div>
 
       <div class="text-area-container">
+        <div #substrate class="substrate"></div>
         <textarea
+          (scroll)="scroll($event)"
           formControlName="noteText"
           cols="30"
           rows="10"
