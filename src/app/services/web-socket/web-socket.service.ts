@@ -101,7 +101,6 @@ export class WebSocketService implements WsService {
   * */
   public send(event: string, data: any = {}): void {
     if (event && this.isConnected) {
-      console.log('SEND', event);
       this.websocket$?.next(<any>JSON.stringify({ event, data }));
     } else {
       console.error('Send error!');

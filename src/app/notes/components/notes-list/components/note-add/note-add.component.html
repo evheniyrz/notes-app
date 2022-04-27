@@ -6,3 +6,33 @@
   class="add-note">
   <span class="material-icons">add</span>
 </button>
+
+<ng-template #dialogTemplate>
+
+  <mat-dialog-content class="add-note-dialog-content">
+    <form [formGroup]="noteForm" (ngSubmit)="onSubmit()" class="note-form">
+      <div class="text-area-container">
+        <textarea
+          formControlName="noteTitle"
+          cols="30"
+          rows="2"
+          autofocus
+          placeholder="Add note title"
+          class="add-note-textarea add-note-title"></textarea>
+          <mat-error *ngIf="noteTitleControl.touched && noteTitleControl.hasError('required')" class="error-hint">This field required</mat-error>
+      </div>
+
+      <div class="text-area-container">
+        <textarea
+          formControlName="noteText"
+          cols="30"
+          rows="10"
+          placeholder="Add note text"
+          class="add-note-textarea add-note-content"></textarea>
+          <mat-error *ngIf="noteTitleControl.touched && noteTextControl.hasError('required')" class="error-hint">This field required</mat-error>
+      </div>
+      <button mat-raised-button color="primary" type="submit">create note</button>
+    </form>
+  </mat-dialog-content>
+
+</ng-template>

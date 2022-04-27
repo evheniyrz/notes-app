@@ -9,6 +9,7 @@ import { NotesListComponent } from './components/notes-list/notes-list.component
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { NoteSearchComponent } from './components/notes-list/components/note-search/note-search.component';
 import { NoteAddComponent } from './components/notes-list/components/note-add/note-add.component';
 import { NoteApiService } from './services/note/note.service';
@@ -33,7 +34,8 @@ export const NOTE_API_CONFIGURATION: InjectionToken<NoteApiConfiguration> = new 
     ReactiveFormsModule,
     MatButtonModule,
     MatTooltipModule,
-    MatDialogModule
+    MatDialogModule,
+    MatFormFieldModule
   ],
   providers: [
     {

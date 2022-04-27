@@ -5,3 +5,28 @@
     background-color: #fff;
   }
 }
+
+.add-note-dialog-content {
+
+  .note-form {
+    display: flex;
+    flex-flow: column;
+
+    .text-area-container {
+      width: 100%;
+      position: relative;
+
+      .add-note-textarea {
+        resize: none;
+        width: 100%;
+        margin-bottom: 15px;
+      }
+
+      .error-hint {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+      }
+    }
+  }
+}

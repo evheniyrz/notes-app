@@ -11,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { WebSocketService } from './services/web-socket/web-socket.service';
 import { WS_CONFIG } from './services/web-socket/ws-config.model';
+import { MakeIdModule } from 'makeid';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { WS_CONFIG } from './services/web-socket/ws-config.model';
     NotesModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    InMemoryWebApiModule.forRoot(DbService)
+    InMemoryWebApiModule.forRoot(DbService),
+    MakeIdModule
   ],
   providers: [
     DbService,
