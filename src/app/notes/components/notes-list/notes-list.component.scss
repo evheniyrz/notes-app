@@ -17,6 +17,7 @@
 
   .note-list-container {
     flex: 1;
+    overflow-y: auto;
 
     .note-list-item {
       width: 100%;
@@ -30,6 +31,7 @@
         flex: 1;
         display: flex;
         flex-flow: column;
+        max-width: calc(100% - 40px);
 
         .item-title {
           font-weight: 500;
@@ -38,6 +40,7 @@
           margin-bottom: 5px;
           white-space: nowrap;
           text-overflow: ellipsis;
+          overflow: hidden;
         }
 
         .item-date {

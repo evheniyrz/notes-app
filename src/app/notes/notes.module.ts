@@ -15,6 +15,8 @@ import { NoteAddComponent } from './components/notes-list/components/note-add/no
 import { NoteApiService } from './services/note/note.service';
 import { environment } from 'src/environments/environment';
 import { NoteApiConfiguration } from './services/note/note-api.model';
+import { TagsComponent } from './components/notes-list/components/tags/tags.component';
+import { MatChipsModule } from '@angular/material/chips';
 
 export const NOTE_API_CONFIGURATION: InjectionToken<NoteApiConfiguration> = new InjectionToken('Note API configuration');
 
@@ -25,7 +27,8 @@ export const NOTE_API_CONFIGURATION: InjectionToken<NoteApiConfiguration> = new 
     NotesReviewComponent,
     NotesListComponent,
     NoteSearchComponent,
-    NoteAddComponent
+    NoteAddComponent,
+    TagsComponent
   ],
   imports: [
     CommonModule,
@@ -35,7 +38,8 @@ export const NOTE_API_CONFIGURATION: InjectionToken<NoteApiConfiguration> = new 
     MatButtonModule,
     MatTooltipModule,
     MatDialogModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatChipsModule
   ],
   providers: [
     {

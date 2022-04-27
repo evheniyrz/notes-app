@@ -1,0 +1,9 @@
+:host {
+  display: block;
+  padding: 10px;
+
+}
+::ng-deep .note-chip {
+  min-height: 20px;
+  padding: 0 10px;
+}
