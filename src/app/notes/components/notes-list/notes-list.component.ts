@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { BehaviorSubject, concatMap, map, Observable, tap } from 'rxjs';
 import { Note } from 'src/app/services/in-memory-db/models/note.model';
 import { WebSocketService } from 'src/app/services/web-socket/web-socket.service';
@@ -17,11 +18,16 @@ export class NotesListComponent implements OnInit {
 
   public filteredNoteList$: BehaviorSubject<Note[]> = new BehaviorSubject([] as Note[]);
 
+  public isSelected = false;
+
   private searchValues$: BehaviorSubject<SearchValuesState> = new BehaviorSubject({});
 
   private noteListData: Note[] = [];
 
-  constructor(private wsService: WebSocketService, private service: NoteApiService) {
+  constructor(
+    private wsService: WebSocketService,
+    private service: NoteApiService,
+    private router: Router) {
     this.noteList$ = this.wsService.on(WS_NOTE_EVENTS.ON.UPDATE_DATA).pipe(
       map((resp) => {
         this.noteListData = this.getSortedNotes(resp as Note[]);
@@ -34,11 +40,16 @@ export class NotesListComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public deleteNote(id: string): void {
+  public deleteNote(id: string, isActive: boolean): void {
     this.service.deleteNote(id).pipe(
       concatMap(() => {
         return this.service.getNotes().pipe((
-          tap((response: Note[]) => this.wsService.send(WS_NOTE_EVENTS.SEND.UPDATE_DATA, response))
+          tap((response: Note[]) => {
+            this.wsService.send(WS_NOTE_EVENTS.SEND.UPDATE_DATA, response);
+            if (isActive) {
+              this.router.navigate(['notes']);
+            }
+          })
         ))
       })
     ).subscribe();

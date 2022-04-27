@@ -9,7 +9,7 @@ const wsServer = new ws.Server({ noServer: true });
 wsServer.on('connection', socket => {
   socket.on('message', message => {
     const socketMessage = JSON.parse(message.toString('utf8'));
-    console.log("SOCKET", socketMessage);
+
     wsServer.clients.forEach(function each(client) {
       if (client.readyState === ws.OPEN) {
         setTimeout(function () {
@@ -19,7 +19,7 @@ wsServer.on('connection', socket => {
             Buffer.from(socketMessage)
 
             , { binary: false });
-        }, 1000);
+        }, 500);
 
 
       }

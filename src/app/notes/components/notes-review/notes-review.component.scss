@@ -1,57 +1,68 @@
+$text-area-size: 20px;
+
 :host {
   display: flex;
   flex-flow: column nowrap;
   width: 100%;
+
+  textarea {
+    resize: none;
+    width: 100%;
+    font-size: $text-area-size;
+  }
+
+  .note-title {
+    min-height: 62px;
+    border-bottom: 2px solid #ffffff;
+
+    .title-textarea {
+      height: 100%;
+    }
+  }
+
+  .text-area-container {
+    position: relative;
+    display: inline-block;
+    font-size: 0;
+    width: 100%;
+    flex: 1;
+
+    .substrate {
+      position: absolute;
+      display: inline-block;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 100%;
+      font-family: monospace;
+      font-size: $text-area-size;
+      text-rendering: auto;
+      color: transparent;
+      white-space: pre-wrap;
+      overflow-wrap: break-word;
+      background: #ffffff;
+      border-width: 1px;
+      border-style: solid;
+      z-index: 0;
+      padding: 2px;
+      overflow-y: auto;
+    }
+
+    textarea.note-content {
+      position: relative;
+      z-index: 2;
+      background: transparent;
+      -webkit-appearance: textfield;
+      -moz-appearance: textfield;
+      appearance: textfield;
+      height: 100%;
+    }
+  }
 }
 
-$text-area-size: 14px;
-
-.text-area-container {
-  position: relative;
-  display: inline-block;
-  font-size: 0;
-  width: 100%;
-  flex: 1;
-}
-
-.substrate {
-  position: absolute;
-  display: inline-block;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 100%;
-  font-family: monospace;
-  font-size: $text-area-size;
-  text-rendering: auto;
-  color: transparent;
-  white-space: pre-wrap;
-  overflow-wrap: break-word;
-  background: #ffffff;
-  border-width: 1px;
-  border-style: solid;
-  z-index: 0;
-  padding: 2px;
-  overflow-y: auto;
-}
 
 ::ng-deep .substrate > mark {
   color: transparent;
   background-color: skyblue !important;
-}
-
-textarea {
-  resize: none;
-  width: 100%;
-}
-
-textarea.note-content {
-  position: relative;
-  font-size: $text-area-size;
-  z-index: 2;
-  background: transparent;
-  -webkit-appearance: textfield;
-  -moz-appearance: textfield;
-  appearance: textfield;
-  height: 100%;
+  border-radius: 5px;
 }

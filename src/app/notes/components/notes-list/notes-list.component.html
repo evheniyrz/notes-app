@@ -6,14 +6,19 @@
 <div class="item-container note-list-container">
   <ng-container *ngIf="noteList$ | async; let notes;">
     <ng-container *ngIf="notes.length > 0; else nodataTemplate">
-      <div *ngFor="let note of filteredNoteList$ | async; count as length;" class="note-list-item">
+      <div *ngFor="let note of filteredNoteList$ | async;" class="note-list-item">
         <div class="note-data">
-          <a [routerLink]="[{ outlets: {notereview: [note.id]}}]" class="item-title">{{note.title}}</a>
+          <a
+            [routerLink]="[{ outlets: {notereview: [note.id]}}]"
+            [routerLinkActive]="'active'"
+            #rla="routerLinkActive"
+            class="item-title">{{note.title}}</a>
           <span class="item-date">{{note.updateAt | date: 'dd.MM.yyyy'}}</span>
         </div>
         <button
           mat-icon-button
-          (click)="deleteNote(note.id)"
+          matTooltip="Delete note"
+          (click)="deleteNote(note.id, rla.isActive)"
           class="delete-button">
           <span class="material-icons">close</span>
         </button>
