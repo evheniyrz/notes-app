@@ -44,6 +44,7 @@ export class NotesReviewComponent implements OnInit, OnDestroy {
             title: value,
             updateAt: Date.now()
           };
+          this.currentNote = payload;
 
           this.updateNote(payload);
         }
