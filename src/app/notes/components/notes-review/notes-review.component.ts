@@ -55,7 +55,8 @@ export class NotesReviewComponent implements OnInit, OnDestroy {
     this.textAreaControl.valueChanges
       .pipe(
         tap((value: string) => {
-          this.substrateContainer.nativeElement.innerHTML = this.highlightHashTags(value);
+          console.log('VALUE', { value });
+          (this.substrateContainer.nativeElement as HTMLDivElement).innerHTML = this.highlightHashTags(value);
         }),
         takeUntil(this.onDestroy$)
       ).subscribe();
@@ -110,7 +111,7 @@ export class NotesReviewComponent implements OnInit, OnDestroy {
   }
 
   private highlightHashTags(text: string): string {
-    return text.replace(this.hashtagsRegex, '$1<mark>$2</mark>');
+    return text.replace(this.hashtagsRegex, '$1<mark>$2</mark>').replace(/(?:\ r\n|\r|\n)/g, '<br>');
   }
 
   private updateNote(payload: Note): void {
