@@ -13,7 +13,6 @@ import { NoteApiService } from '../../services/note/note.service';
   styleUrls: ['./notes-review.component.scss']
 })
 export class NotesReviewComponent implements OnInit, OnDestroy {
-  @ViewChild('substrate', { static: true }) substrateContainer!: ElementRef;
 
   public textAreaControl!: FormControl;
   public titleAreaControl!: FormControl;
@@ -52,15 +51,6 @@ export class NotesReviewComponent implements OnInit, OnDestroy {
       takeUntil(this.onDestroy$)
     ).subscribe();
 
-    this.textAreaControl.valueChanges
-      .pipe(
-        tap((value: string) => {
-          console.log('VALUE', { value });
-          (this.substrateContainer.nativeElement as HTMLDivElement).innerHTML = this.highlightHashTags(value);
-        }),
-        takeUntil(this.onDestroy$)
-      ).subscribe();
-
     this.activatedRoute.params.pipe(
       concatMap((params: Params) => {
         this.noteId = params['id'];
@@ -87,13 +77,6 @@ export class NotesReviewComponent implements OnInit, OnDestroy {
     this.onDestroy$.complete();
   }
 
-  public scroll(event: Event): void {
-    if (null != event) {
-      this.substrateContainer.nativeElement.scrollTop =
-        (event.target as HTMLTextAreaElement)?.scrollTop;
-    }
-  }
-
   public updateNoteContent(): void {
     if (null != this.textAreaControl && this.textAreaControl.valid && (this.textAreaControl.value as string).trim().length > 0) {
       const content: string = this.textAreaControl.value;
@@ -108,10 +91,6 @@ export class NotesReviewComponent implements OnInit, OnDestroy {
 
       this.updateNote(payload);
     }
-  }
-
-  private highlightHashTags(text: string): string {
-    return text.replace(this.hashtagsRegex, '$1<mark>$2</mark>').replace(/(?:\ r\n|\r|\n)/g, '<br>');
   }
 
   private updateNote(payload: Note): void {

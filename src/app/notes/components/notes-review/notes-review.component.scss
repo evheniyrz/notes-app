@@ -9,6 +9,7 @@ $text-area-size: 20px;
     resize: none;
     width: 100%;
     font-size: $text-area-size;
+    display: block;
   }
 
   .note-title {
@@ -27,43 +28,6 @@ $text-area-size: 20px;
     width: 100%;
     flex: 1;
 
-    .substrate {
-      position: absolute;
-      display: inline-block;
-      left: 0;
-      top: 0;
-      height: 100%;
-      width: 100%;
-      font-family: monospace;
-      font-size: $text-area-size;
-      text-rendering: auto;
-      color: transparent;
-      white-space: pre-wrap;
-      overflow-wrap: break-word;
-      background: #ffffff;
-      border-width: 1px;
-      border-style: solid;
-      z-index: 0;
-      padding: 2px;
-      overflow-y: auto;
-      line-height: 23px;
-    }
 
-    textarea.note-content {
-      position: relative;
-      z-index: 2;
-      background: transparent;
-      -webkit-appearance: textfield;
-      -moz-appearance: textfield;
-      appearance: textfield;
-      height: 100%;
-    }
   }
-}
-
-
-::ng-deep .substrate > mark {
-  color: transparent;
-  background-color: skyblue !important;
-  border-radius: 5px;
 }

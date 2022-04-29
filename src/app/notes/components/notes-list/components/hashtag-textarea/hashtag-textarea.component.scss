@@ -1,0 +1,83 @@
+:host {
+  display: block;
+  position:relative;
+  min-height: 40px;
+  height: 100%;
+  font: 400 14px/20px Roboto,Helvetica Neue,sans-serif;;
+}
+
+.substrate {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  color: transparent;
+  font: inherit;
+  overflow-y: auto;
+  background-color: #ffffff;
+  padding: 2px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: transparent;
+
+  * {
+    color: transparent;
+  }
+}
+
+.texarea-field {
+  position: relative;
+  height: 100%;
+  min-height: 100%;
+  max-height: 1px;
+  width: 100%;
+  font: inherit;
+  overflow-y: auto;
+  overflow-x: hidden;
+  appearance: textfield;
+  padding: 2px;
+  border-width: 1px;
+  border-style: solid;
+  resize: none;
+
+  * {
+    color: #000;
+  }
+}
+
+::ng-deep .substrate  mark {
+  color: transparent;
+  background-color: skyblue !important;
+  border-radius: 5px;
+  padding: 1px;
+}
+
+/**
+* the following settings are for the vertical/horizontal scrollbar.
+*/
+::ng-deep .scrollable-container {
+  scrollbar-color: #8f8f8f #dddddd;
+  scrollbar-width: thin;
+}
+
+::ng-deep .scrollable-container::-webkit-scrollbar{
+  height: 8px;
+  width: 8px;
+}
+
+::ng-deep .scrollable-container::-webkit-scrollbar-thumb {
+  background: #adadad;
+  border-radius: 16px;
+}
+
+::ng-deep .scrollable-container::-webkit-scrollbar-thumb:hover {
+  background: #8f8f8f;
+}
+
+::ng-deep .scrollable-container::-webkit-scrollbar-track-piece {
+  background: #dddddd;
+}
+
+/**END scrolbar styles*/
+

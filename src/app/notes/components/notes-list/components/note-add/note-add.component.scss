@@ -17,56 +17,23 @@ $text-area-size: 16px;
     .text-area-container {
       width: 100%;
       position: relative;
+      margin-bottom: 18px;
+
+      &.note-content-container {
+        height: 150px;
+      }
 
       .add-note-textarea {
         resize: none;
         width: 100%;
-        margin-bottom: 15px;
-      }
-
-      .add-note-content {
-        font-size: $text-area-size;
-        position: relative;
-        z-index: 2;
-        background: transparent;
-        -webkit-appearance: textfield;
-        -moz-appearance: textfield;
-        appearance: textfield;
-        height: 100%;
-      }
-
-      .substrate {
-        position: absolute;
-        display: inline-block;
-        left: 0;
-        top: 0;
-        height: 100%;
-        width: 100%;
-        font-family: monospace;
-        font-size: $text-area-size;
-        text-rendering: auto;
-        color: transparent;
-        white-space: pre-wrap;
-        overflow-wrap: break-word;
-        background: #ffffff;
-        border-width: 1px;
-        border-style: solid;
-        z-index: 0;
-        padding: 2px;
-        overflow-y: auto;
+        display: block;
       }
 
       .error-hint {
         position: absolute;
         left: 0;
-        bottom: 0;
+        bottom: -18px;
       }
     }
   }
-}
-
-::ng-deep .substrate > mark {
-  color: transparent;
-  background-color: skyblue !important;
-  border-radius: 5px;
 }

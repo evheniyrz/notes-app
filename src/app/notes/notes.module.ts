@@ -17,6 +17,7 @@ import { environment } from 'src/environments/environment';
 import { NoteApiConfiguration } from './services/note/note-api.model';
 import { TagsComponent } from './components/notes-list/components/tags/tags.component';
 import { MatChipsModule } from '@angular/material/chips';
+import { HashtagTextareaComponent } from './components/notes-list/components/hashtag-textarea/hashtag-textarea.component';
 
 export const NOTE_API_CONFIGURATION: InjectionToken<NoteApiConfiguration> = new InjectionToken('Note API configuration');
 
@@ -28,7 +29,8 @@ export const NOTE_API_CONFIGURATION: InjectionToken<NoteApiConfiguration> = new 
     NotesListComponent,
     NoteSearchComponent,
     NoteAddComponent,
-    TagsComponent
+    TagsComponent,
+    HashtagTextareaComponent
   ],
   imports: [
     CommonModule,

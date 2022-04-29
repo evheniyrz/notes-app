@@ -14,7 +14,6 @@ import { WS_NOTE_EVENTS } from 'src/app/services/web-socket/ws-note-events';
   styleUrls: ['./note-add.component.scss']
 })
 export class NoteAddComponent implements OnInit, OnDestroy {
-  @ViewChild('substrate', { static: false }) substrateContainer!: ElementRef;
   @ViewChild('dialogTemplate') dialogTemplate!: TemplateRef<any>;
 
   public noteForm: FormGroup;
@@ -45,13 +44,6 @@ export class NoteAddComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-
-    this.noteTextControl.valueChanges.pipe(
-      tap((value: string) => {
-        this.substrateContainer.nativeElement.innerHTML = this.highlightHashTags(value);
-      }),
-      takeUntil(this.onDestroy$)
-    ).subscribe();
   }
 
   ngOnDestroy(): void {
@@ -66,13 +58,6 @@ export class NoteAddComponent implements OnInit, OnDestroy {
         width: '50%',
         minWidth: '280px'
       });
-  }
-
-  public scroll(event: Event): void {
-    if (null != event) {
-      this.substrateContainer.nativeElement.scrollTop =
-        (event.target as HTMLTextAreaElement)?.scrollTop;
-    }
   }
 
   public onSubmit(): void {
@@ -112,7 +97,4 @@ export class NoteAddComponent implements OnInit, OnDestroy {
     return (text.match(this.hashtagsRegex) as string[]).map((tag: string) => tag.trim());
   }
 
-  private highlightHashTags(text: string): string {
-    return text.replace(this.hashtagsRegex, '$1<mark>$2</mark>');
-  }
 }

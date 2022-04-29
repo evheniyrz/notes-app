@@ -22,15 +22,8 @@
           <mat-error *ngIf="noteTitleControl.touched && noteTitleControl.hasError('required')" class="error-hint">This field required</mat-error>
       </div>
 
-      <div class="text-area-container">
-        <div #substrate class="substrate"></div>
-        <textarea
-          (scroll)="scroll($event)"
-          formControlName="noteText"
-          cols="30"
-          rows="10"
-          placeholder="Add note text"
-          class="add-note-textarea add-note-content"></textarea>
+      <div class="text-area-container note-content-container">
+          <app-hashtag-textarea formControlName="noteText" placeholder="Add note text"></app-hashtag-textarea>
           <mat-error *ngIf="noteTitleControl.touched && noteTextControl.hasError('required')" class="error-hint">This field required</mat-error>
       </div>
       <button mat-raised-button color="primary" type="submit">create note</button>

@@ -1,0 +1,10 @@
+<div #substrate class="substrate scrollable-container"></div>
+<div
+  #textarea
+  (input)="change($event)"
+  (scroll)="scroll($event)"
+  (blur)="onBlur()"
+  class="texarea-field scrollable-container"
+  contenteditable="true"
+  role="textbox"
+></div>
