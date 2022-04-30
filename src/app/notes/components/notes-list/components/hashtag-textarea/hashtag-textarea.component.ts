@@ -17,7 +17,8 @@ export class HashtagTextareaComponent implements OnInit, ControlValueAccessor, O
   @ViewChild('textarea', { static: true }) textarea!: ElementRef;
   @ViewChild('substrate', { static: true }) substrateContainer!: ElementRef;
 
-  @Output() blur: EventEmitter<void> = new EventEmitter();
+  @Output() blurChange: EventEmitter<void> = new EventEmitter();
+  @Output() focusChange: EventEmitter<void> = new EventEmitter();
   onChange!: Function;
   onTouched!: Function;
 
@@ -43,7 +44,11 @@ export class HashtagTextareaComponent implements OnInit, ControlValueAccessor, O
   }
 
   public onBlur(): void {
-    this.blur.next();
+    this.blurChange.next();
+  }
+
+  public onFocus(): void {
+    this.focusChange.next();
   }
 
   public change(event: Event) {
@@ -70,7 +75,7 @@ export class HashtagTextareaComponent implements OnInit, ControlValueAccessor, O
   }
 
   ngOnDestroy(): void {
-    this.blur.unsubscribe();
+    this.blurChange.unsubscribe();
   }
 
   private highlightHashTags(text: string | null): string {
