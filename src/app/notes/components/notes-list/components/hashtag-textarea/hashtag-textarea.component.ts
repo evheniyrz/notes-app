@@ -54,6 +54,7 @@ export class HashtagTextareaComponent implements OnInit, ControlValueAccessor, O
   public change(event: Event) {
     // Angular does not know that the value has changed
     // from our component, so we need to update her with the new value.
+    //take the value "innerHTML" to keep the formatting of the content
     if (null != event) {
       this.onChange((event?.target as HTMLDivElement).innerHTML);
       this.onTouched((event?.target as HTMLDivElement).innerHTML);
