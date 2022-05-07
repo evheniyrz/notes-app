@@ -5,6 +5,7 @@ import { Note } from 'src/app/services/in-memory-db/models/note.model';
 import { WebSocketService } from 'src/app/services/web-socket/web-socket.service';
 import { WS_NOTE_EVENTS } from 'src/app/services/web-socket/ws-note-events';
 import { SearchValuesState } from '../../models/searc.model';
+import { NotesFilterService } from '../note-list/services/note-filter/note-filter.service';
 
 @Component({
   selector: 'app-tags',
@@ -12,11 +13,10 @@ import { SearchValuesState } from '../../models/searc.model';
   styleUrls: ['./tags.component.scss']
 })
 export class TagsComponent implements OnInit {
-  @Output() onSearch: EventEmitter<SearchValuesState> = new EventEmitter();
 
   public tagList$: Observable<string[]>;
 
-  constructor(private wsService: WebSocketService) {
+  constructor(private wsService: WebSocketService, private filterService: NotesFilterService<Note>) {
     this.tagList$ = merge(
       this.wsService.on(WS_NOTE_EVENTS.ON.UPDATE_DATA).pipe(
         map((resp) => { return this.createTagList(resp as Note[]) })
@@ -32,7 +32,8 @@ export class TagsComponent implements OnInit {
   }
 
   public createSearch(chipList: MatChipListChange): void {
-    this.onSearch.next({ tags: chipList.value });
+    // this.onSearch.next({ tags: chipList.value });
+    this.filterService.onFilterChange(chipList.value);
   }
 
   private createTagList(input: Note[]): string[] {

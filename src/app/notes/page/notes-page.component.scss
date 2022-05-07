@@ -8,10 +8,35 @@
   grid-template-areas:
     "list review"
   ;
-}
 
-.note-list {
-  grid-area: list;
+  .note-list {
+    grid-area: list;
+    display: flex;
+    flex-flow: column nowrap;
+
+    .item-container {
+      width: 100%;
+
+      &.action-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        align-self: flex-start;
+        border-bottom: 2px solid #ffffff;
+        padding: 10px;
+      }
+
+      &.tag-list-container {
+        align-self: flex-end;
+        min-height: 60px;
+        max-height: 120px;
+        border-top: 2px solid #ffffff;
+        overflow-y: auto;
+        overflow-x: hidden;
+      }
+    }
+  }
+
 }
 
 .note-review {

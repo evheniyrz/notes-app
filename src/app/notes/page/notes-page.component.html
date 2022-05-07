@@ -1,4 +1,15 @@
-<app-notes-list class="note-list"></app-notes-list>
+<div class="note-list">
+  <div class="item-container action-container">
+    <app-note-search></app-note-search>
+    <app-note-add></app-note-add>
+  </div>
+
+  <app-notes-list></app-notes-list>
+
+  <div class="item-container tag-list-container">
+    <app-tags></app-tags>
+  </div>
+</div>
 
 <div class="note-review">
   <router-outlet name="notereview" #noteOutlet="outlet"></router-outlet>

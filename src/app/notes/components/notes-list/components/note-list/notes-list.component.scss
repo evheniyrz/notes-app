@@ -1,19 +1,9 @@
 :host {
   display: flex;
   flex-flow: column nowrap;
-
-  .item-container {
-    width: 100%;
-  }
-
-  .action-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    align-self: flex-start;
-    border-bottom: 2px solid #ffffff;
-    padding: 10px;
-  }
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
 
   .note-list-container {
     flex: 1;
@@ -77,11 +67,5 @@
         border-radius: 50%;
       }
     }
-  }
-
-  .tag-list-container {
-    align-self: flex-end;
-    min-height: 60px;
-    border-top: 2px solid #ffffff;
   }
 }

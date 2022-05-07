@@ -1,12 +1,7 @@
-<div class="item-container action-container">
-  <app-note-search (onSearch)="search($event)"></app-note-search>
-  <app-note-add></app-note-add>
-</div>
-
 <div class="item-container note-list-container">
-  <ng-container *ngIf="noteList$ | async; let notes;">
+  <ng-container *ngIf="noteDataSource.connect() | async; let notes;">
     <ng-container *ngIf="notes.length > 0; else nodataTemplate">
-      <div *ngFor="let note of filteredNoteList$ | async;" class="note-list-item">
+      <div *ngFor="let note of notes;" class="note-list-item">
         <div class="note-data">
           <a
             [routerLink]="[{ outlets: {notereview: [note.id]}}]"
@@ -32,8 +27,4 @@
       <span>to add note</span>
     </div>
   </ng-template>
-</div>
-
-<div class="item-container tag-list-container">
-  <app-tags (onSearch)="search($event)"></app-tags>
 </div>

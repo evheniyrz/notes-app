@@ -19,7 +19,7 @@ export class NotesPageComponent implements OnInit {
       filter((status: boolean) => status),
       switchMap(() => this.noteService.getNotes().pipe(
         tap((response: Note[]) => {
-          this.wsService.send(WS_NOTE_EVENTS.SEND.UPDATE_DATA, response)
+          this.wsService.send(WS_NOTE_EVENTS.SEND.UPDATE_DATA, response);
         })
       ))
     ).subscribe();

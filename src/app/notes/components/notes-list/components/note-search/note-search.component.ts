@@ -1,7 +1,9 @@
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, Subject, takeUntil, tap } from 'rxjs';
+import { Note } from 'src/app/services/in-memory-db/models/note.model';
 import { SearchValuesState } from '../../models/searc.model';
+import { NotesFilterService } from '../note-list/services/note-filter/note-filter.service';
 
 @Component({
   selector: 'app-note-search',
@@ -15,14 +17,14 @@ export class NoteSearchComponent implements OnInit, OnDestroy {
   public searchControl: FormControl = new FormControl();
 
   private onDestroy$: Subject<void> = new Subject();
-  constructor() { }
+  constructor(private filterService: NotesFilterService<Note>) { }
 
   ngOnInit(): void {
     this.searchControl.valueChanges.pipe(
       debounceTime(300),
       distinctUntilChanged(),
       tap((value: string) => {
-        this.onSearch.next({ text: [value.trim()] });
+        this.filterService.onFilterChange(value);
       }),
       takeUntil(this.onDestroy$)
     ).subscribe();
