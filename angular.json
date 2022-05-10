@@ -109,5 +109,8 @@
       }
     }
   },
-  "defaultProject": "app-notes"
+  "defaultProject": "app-notes",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }
