@@ -1,0 +1,18 @@
+<div class="item-container note-list-container">
+  <ng-container *ngIf="dataSource.connect() | async; let items;">
+    <ng-container *ngIf="items.length > 0; else nodataTemplate">
+      <ng-container *ngFor="let item of items;let index=index;">
+        <ng-container *ngTemplateOutlet="itemTemplate;context: { $implicit: item, index: index }">
+          <ng-content></ng-content>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+  </ng-container>
+
+  <ng-template #nodataTemplate>
+    <div  class="no-data-available">
+      <span>No Data Available</span>
+      <span>Add data to create list</span>
+    </div>
+  </ng-template>
+</div>

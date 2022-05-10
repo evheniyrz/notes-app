@@ -4,7 +4,28 @@
     <app-note-add></app-note-add>
   </div>
 
-  <app-notes-list></app-notes-list>
+  <app-notes-list [dataSource]="noteDataSource" [itemTemplate]="itemListTemplate">
+    <ng-template #itemListTemplate let-item>
+      <div class="note-list-item" [class.selected]="rla.isActive">
+        <div class="note-data">
+          <a
+            [routerLink]="[{ outlets: {notereview: [item.id]}}]"
+            [routerLinkActive]="'active'"
+            #rla="routerLinkActive"
+            class="item-title">{{item.title}}</a>
+          <span class="item-date">{{item.updateAt | date: 'dd.MM.yyyy'}}</span>
+        </div>
+        <button
+          mat-icon-button
+          matTooltip="Delete note"
+          (click)="deleteNote(item.id, rla.isActive)"
+          class="delete-button">
+          <span class="material-icons">close</span>
+        </button>
+
+      </div>
+    </ng-template>
+  </app-notes-list>
 
   <div class="item-container tag-list-container">
     <app-tags></app-tags>

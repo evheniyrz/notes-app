@@ -51,3 +51,45 @@
     margin: auto;
   }
 }
+
+ .note-list-item {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px;
+      border-bottom: 2px solid #ffffff;
+
+      &.selected {
+          background-color: rgba(255, 255, 255, .3);
+      }
+
+      .note-data {
+        flex: 1;
+        display: flex;
+        flex-flow: column;
+        max-width: calc(100% - 40px);
+
+        .item-title {
+          font-weight: 500;
+          font-size: 16px;
+          color: #212121;
+          margin-bottom: 5px;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
+
+          &.active {
+            color: #ffffff;
+          }
+        }
+
+        .item-date {
+          color: #ababab;
+        }
+      }
+
+      .delete-button {
+        color: #ffffff;
+      }
+    }

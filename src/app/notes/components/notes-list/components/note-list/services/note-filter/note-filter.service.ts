@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Note } from 'src/app/services/in-memory-db/models/note.model';
-import { ListDataSource } from '../../entity/list-data-source';
+import { ListDataSource } from '../../../../../../../shared/list/data-source/list-data-source';
 
 @Injectable()
 export class NotesFilterService<T> {

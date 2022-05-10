@@ -1,4 +1,4 @@
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 
 export class ListDataSource<T extends Record<string, any>> {
 
@@ -36,7 +36,9 @@ export class ListDataSource<T extends Record<string, any>> {
   }
 
   public connect(): Observable<T[]> {
-    return this.#filteredData.asObservable();
+    return this.#filteredData.asObservable().pipe(map((data: T[]) => {
+      return this.sort(data);
+    }));
   }
 
   /**compare of top level fields value with filter */
@@ -48,6 +50,10 @@ export class ListDataSource<T extends Record<string, any>> {
     }, '');
 
     return testedValue.includes(filter.trim().toLowerCase());
+  }
+
+  public sort(data: T[]): T[] {
+    return data;;
   }
 
   private onDataChange(data: T[]): void {

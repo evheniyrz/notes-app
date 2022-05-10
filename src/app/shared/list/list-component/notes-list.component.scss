@@ -1,0 +1,29 @@
+:host {
+  display: flex;
+  flex-flow: column nowrap;
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  .note-list-container {
+    flex: 1;
+    overflow-y: auto;
+
+    .no-data-available {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-flow: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      color: #ffffff;
+
+      .material-icons.no-data-template {
+        background-color: #fff;
+        color: #212121;
+        border-radius: 50%;
+      }
+    }
+  }
+}

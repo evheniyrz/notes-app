@@ -17,8 +17,8 @@ import { NoteApiConfiguration } from './services/note/note-api.model';
 import { TagsComponent } from './components/notes-list/components/tags/tags.component';
 import { MatChipsModule } from '@angular/material/chips';
 import { HashtagTextareaComponent } from './components/notes-list/components/hashtag-textarea/hashtag-textarea.component';
-import { NotesListComponent } from './components/notes-list/components/note-list/notes-list.component';
 import { NotesFilterService } from './components/notes-list/components/note-list/services/note-filter/note-filter.service';
+import { ListModule } from '../shared/list/list.module';
 
 export const NOTE_API_CONFIGURATION: InjectionToken<NoteApiConfiguration> = new InjectionToken('Note API configuration');
 
@@ -27,7 +27,6 @@ export const NOTE_API_CONFIGURATION: InjectionToken<NoteApiConfiguration> = new 
   declarations: [
     NotesPageComponent,
     NotesReviewComponent,
-    NotesListComponent,
     NoteSearchComponent,
     NoteAddComponent,
     TagsComponent,
@@ -42,7 +41,8 @@ export const NOTE_API_CONFIGURATION: InjectionToken<NoteApiConfiguration> = new 
     MatTooltipModule,
     MatDialogModule,
     MatFormFieldModule,
-    MatChipsModule
+    MatChipsModule,
+    ListModule
   ],
   providers: [
     {
